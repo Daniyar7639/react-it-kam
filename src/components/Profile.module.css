@@ -1,0 +1,11 @@
+.main {
+    grid-area: main;
+    background-color: rgb(56, 195, 18);
+  }
+  .img1 img {
+    
+  }
+
+  .item {
+    color: blue;
+  }
