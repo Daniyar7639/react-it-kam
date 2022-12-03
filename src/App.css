@@ -10,3 +10,7 @@
   gap: 10px;
   
 }
+.app-wrapper-content {
+  grid-area: main;
+  background-color: rgb(56, 195, 18);
+}
