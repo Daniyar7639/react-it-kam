@@ -1,5 +1,5 @@
-import s from "./Myposts.module.css";
-import Post from "./Post/Post";
+import s from './Myposts.module.css';
+import Post from './Post/Post';
 
 const Myposts = () => {
   return (
@@ -11,8 +11,8 @@ const Myposts = () => {
         <button>Remove post</button>
       </div>
       <div className={s.posts}>
-        <Post message="Hi, How are you?"/>
-        <Post message="It's my first post"/>
+        <Post message='Hi, How are you?'/>
+        <Post message="It's my first" post/>
         <Post />
       </div>
     </div>
