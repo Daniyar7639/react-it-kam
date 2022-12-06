@@ -6,6 +6,7 @@ import Profile from './components/Profile/Profile';
 import {Routes, Route,} from 'react-router-dom';
 import News from './components/News/News';
 import Musics from './components/Musics/Musics';
+import { Settings } from "./components/Settings/Settings";
 
 
 const App = (props) => {
@@ -15,10 +16,11 @@ const App = (props) => {
         <Navbar />
         <div className='app-wrapper-content'>
           <Routes>
-          <Route path='/Messages' element={ <Dialogs />}/>
-          <Route path='/Profile' element={ <Profile />}/>
-          <Route path='/News' element={ <News />}/>
-          <Route path='/Music' element={ <Musics />}/>
+          <Route path='/dialogs/*' element={ <Dialogs />}/>
+          <Route path='/profile' element={ <Profile />}/>
+          <Route path='/news' element={ <News />}/>
+          <Route path='/music' element={ <Musics />}/>
+          <Route path='/settings' element={<Settings/>}/>
           </Routes>    
         </div>
       </div>

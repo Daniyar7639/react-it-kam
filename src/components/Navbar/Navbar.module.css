@@ -4,13 +4,14 @@
     padding: 20px;
   }
   .item {
+    color: white;
     padding-bottom: 10px;
   }
   .item :hover {
     font-size: larger;
   }
-  .item {
-    color: white;
+  .item a {
+    
     text-decoration: none;
    
   }
