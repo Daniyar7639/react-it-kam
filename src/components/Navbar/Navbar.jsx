@@ -21,6 +21,9 @@ const Navbar = () => {
       <div className={s.item}>
         <NavLink to='/settings' className={setactive}>Settings</NavLink>
       </div>
+      <div className={s.item}>
+        <NavLink to='/friends' className={setactive}>Friends</NavLink>
+      </div>
     </nav>
 };
 export default Navbar;
