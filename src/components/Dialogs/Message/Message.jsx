@@ -3,6 +3,7 @@ import s from './../Dialogs.module.css';
 
 const Message = (props) => {
   let addNewMessage = React.createRef();
+
   let addMessage = () => {
     let text = addNewMessage.current.value;
     props.addMessage (text);
@@ -11,7 +12,7 @@ const Message = (props) => {
 
     return <div className={s.message}>
       {props.message}
-      <textarea ref={addNewMessage}></textarea>
+      <textarea ref={addNewMessage} ></textarea>
       <button onClick={addMessage}>Add message</button>
       </div>;
   };

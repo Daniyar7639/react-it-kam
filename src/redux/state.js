@@ -25,16 +25,18 @@ let state = {
       { id: 3, message: "It's my second post", likesCount: 5 },
       { id: 4, message: "It's my 3rd post", likesCount: 9 },
     ],
+    newPostText: 'it-kamas'
   },
 };
-
-export let addPost = (postMessage) => {
+window.state= state
+export let addPost = () => {
     let newPost = {
         id: 5, 
-        message:postMessage,
+        message:state.profilePage.newPostText,
         likesCount: 0
     };
     state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = ''
     rerenderEntireTree(state);
 }
 
@@ -46,5 +48,10 @@ export let addMessage = (dialogMessage) => {
     state.dialogPage.messages.push(newMessage);
     rerenderEntireTree(state);
 };
+
+export let updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
 
 export default state;
