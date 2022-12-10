@@ -8,7 +8,7 @@ const Dialogs = (props) => {
   ));
 
   let messageElements = props.state.messages.map((m) => {
-    return <Message message={m.message} />;
+    return <Message message={m.message} addMessage={props.addMessage}/>;
   });
 
   return (

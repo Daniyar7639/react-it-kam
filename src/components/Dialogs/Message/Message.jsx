@@ -5,7 +5,8 @@ const Message = (props) => {
   let addNewMessage = React.createRef();
   let addMessage = () => {
     let text = addNewMessage.current.value;
-    alert (text);
+    props.addMessage (text);
+    addNewMessage.current.value = ' ';
   }
 
     return <div className={s.message}>
