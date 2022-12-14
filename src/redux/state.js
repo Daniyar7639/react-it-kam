@@ -21,7 +21,7 @@ let store = {
             { id: 4, message: "yo" },
             { id: 5, message: "Hi" },
           ],
-          newMessageText: 'say smth.'
+          newMessageText: ''
         },
       
         profilePage: {
@@ -91,7 +91,7 @@ let store = {
                 message:this._state.dialogPage.newMessageText
             };
             this._state.dialogPage.messages.push(newMessage);
-            this._state.dialogPage.newMessageText = ''
+            this._state.dialogPage.newMessageText = '';
             this._callSubscriber(this._state);
         } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
             this._state.dialogPage.newMessageText = action.newMessage;

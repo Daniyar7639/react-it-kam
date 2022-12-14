@@ -14,6 +14,7 @@ const Myposts = (props) => {
   });
 
   let newPostElement = React.createRef();
+  
   let addPost = () => {
     props.dispatch (addPostActionCreator());
   }
