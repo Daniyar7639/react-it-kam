@@ -4,7 +4,7 @@ import Message from "./Message/Message";
 import {
   addMessageActionCreator,
   updateNewMessageTextActionCreator,
-} from "../../redux/state";
+} from "../../redux/dialog-reducer";
 
 const Dialogs = (props) => {
 
