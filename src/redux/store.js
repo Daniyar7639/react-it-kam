@@ -79,7 +79,7 @@ let store = {
         this._state.sidebarPage = sidebarReducer (this._state.sidebarPage, action);
 
         
-        this._callSubscriber(this._state)
+        this._callSubscriber(this._state);
     }
     
 

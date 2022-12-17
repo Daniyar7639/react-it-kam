@@ -11,6 +11,7 @@ import { Friends } from "./components/Friends/Friens";
 
 
 const App = (props) => {
+   
   return (
       <div className='app-wrapper'>
         <Header />
