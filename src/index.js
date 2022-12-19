@@ -6,12 +6,13 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import { Provider } from './StoreContext';
+import { Provider } from "react-redux";
 
 
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 export let rerenderEntireTree = () => {
   root.render(
       <BrowserRouter>
@@ -24,9 +25,6 @@ export let rerenderEntireTree = () => {
 
 rerenderEntireTree();
 
-store.subscribe(() => {
-  rerenderEntireTree();
-});
 
 
 reportWebVitals();
