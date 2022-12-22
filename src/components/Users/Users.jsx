@@ -1,11 +1,16 @@
+import axios from "axios";
 import React from "react";
 import styles from './Users.module.css'
+import userPhoto from '../../assets/images/user.png'
+
 
 
 
 const Users = (props) => {
-   if (props.users.length===0) {
-    props.setUsers([
+   
+   let getUsers = () => 
+   { if (props.users.length===0) {
+    /*props.setUsers([
       {
         id: 1,
         followed: false,
@@ -33,13 +38,23 @@ const Users = (props) => {
         status: "I am also programmer",
         location: { city: "Nyu-york", country: "USA" },
       },
-    ]);
- };
+    ]);*/
+    axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+        
+        props.setUsers(response.data.items);
+   }) 
+
+ }};
+    
+
+       
+
     return <div>
+        <button onClick={getUsers}>Get Users</button>
         {
             props.users.map (u => <div key={u.id}>
                 <div>
-                    <img src={u.photoUrl} alt='Lion' className={styles.userPhoto} />
+                    <img src={u.photos.small != null ? u.photos.small : userPhoto} alt='Lion' className={styles.userPhoto} />
                 </div>
                 <div>
                     {u.followed 
@@ -47,16 +62,16 @@ const Users = (props) => {
                      : <button onClick={() => {props.follow(u.id)}}>Follow</button>}
                 </div>
                 <div>
-                    {u.fullName}
+                    {u.name}
                 </div>
                 <div>
                     {u.status}
                 </div>
                 <div>
-                    {u.location.country}
+                    {"u.location.country"}
                 </div>
                 <div>
-                    {u.location.city}
+                    {"u.location.city"}
                 </div>
             </div>)
         }
