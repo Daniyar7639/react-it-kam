@@ -1,7 +1,16 @@
 .header{
     grid-area: header;
     background-color: aqua;
+    
   }
   .header img {
     width: 60px;
+  }
+  .logBlock {
+    float: right;
+  }
+  .logBlock a {
+    color: blue;
+    text-decoration: none;
+    margin-right: 15px;
   }
