@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { follow, setCurrentPage, setisFetching, setTotalUsersCount, setUsers, unfollow } from "../../redux/Users-reduser";
+import { follow, setCurrentPage, setisFetching, setTotalUsersCount, setUsers, unfollow, setfollowingProgres } from "../../redux/Users-reduser";
 import Users from "./Users";
-import axios from "axios";
 import Preloader from "../../common/preloader/preloader";
+import { usersApi } from "../../api/api";
+
 
 class UsersContainer extends React.Component {
 
@@ -12,19 +13,21 @@ class UsersContainer extends React.Component {
  };                              konstruktor vizivaetsya po umolchaniyu*/
     componentDidMount () {
         this.props.setisFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize} `).then(response => { 
+        usersApi.getUsers(this.props.currentPage, this.props.pageSize)
+        .then(data => { 
             this.props.setisFetching(false)  
-    this.props.setUsers(response.data.items);
-    this.props.setTotalUsersCount(response.data.totalCount)
+            this.props.setUsers(data.items);
+            this.props.setTotalUsersCount(data.totalCount)
   }); 
     }
 
     onPageChanged = (pageNumber) => {
         this.props.setisFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize} `).then(response => {
+        usersApi.getUsers(pageNumber, this.props.pageSize)
+        .then(data => {
             this.props.setisFetching(false)     
-            this.props.setUsers(response.data.items);
+            this.props.setUsers(data.items);
           });
     };
 
@@ -39,9 +42,10 @@ class UsersContainer extends React.Component {
         onPageChanged={this.onPageChanged} 
         unfollow={this.props.unfollow}
         follow={this.props.follow}
-        users={this.props.users} />
-        
-        
+        users={this.props.users}
+        setfollowingProgres={this.props.setfollowingProgres}
+        followingInProgres={this.props.followingInProgres} />
+          
     </>
   }
 }
@@ -52,7 +56,8 @@ const mapStoreToProps = (state) => {
         pageSize:state.usersPage.pageSize,
         totalUsersCount:state.usersPage.totalUsersCount,
         currentPage:state.usersPage.currentPage,
-        isFetching:state.usersPage.isFetching
+        isFetching:state.usersPage.isFetching,
+        followingInProgres: state.usersPage.followingInProgres
     }
 }
 /* 58 lesson, mapDispatchToProps ubrali vo vnutr vizova connect
@@ -81,6 +86,6 @@ const mapDispatchToProps = (dispatch) => {
 */
 
 const UsersC = connect(mapStoreToProps, 
-    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setisFetching,}) (UsersContainer);
+    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setisFetching, setfollowingProgres }) (UsersContainer);
 
 export default UsersC;
