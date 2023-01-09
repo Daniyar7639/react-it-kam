@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { follow, setCurrentPage, setisFetching, setTotalUsersCount, setUsers, unfollow, setfollowingProgres } from "../../redux/Users-reduser";
+import { follow, setCurrentPage, unfollow, setfollowingProgres, getUsers } from "../../redux/Users-reduser";
 import Users from "./Users";
 import Preloader from "../../common/preloader/preloader";
-import { usersApi } from "../../api/api";
+
 
 
 class UsersContainer extends React.Component {
@@ -12,23 +12,24 @@ class UsersContainer extends React.Component {
         super(props);  
  };                              konstruktor vizivaetsya po umolchaniyu*/
     componentDidMount () {
-        this.props.setisFetching(true)
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        /*this.props.setisFetching(true)
         usersApi.getUsers(this.props.currentPage, this.props.pageSize)
         .then(data => { 
             this.props.setisFetching(false)  
             this.props.setUsers(data.items);
             this.props.setTotalUsersCount(data.totalCount)
-  }); 
+  }); */
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setisFetching(true)
+       /* this.props.setisFetching(true)*/
         this.props.setCurrentPage(pageNumber)
-        usersApi.getUsers(pageNumber, this.props.pageSize)
-        .then(data => {
+        this.props.getUsers(pageNumber, this.props.pageSize)
+       /* .then(data => {
             this.props.setisFetching(false)     
             this.props.setUsers(data.items);
-          });
+          });*/
     };
 
  
@@ -43,7 +44,6 @@ class UsersContainer extends React.Component {
         unfollow={this.props.unfollow}
         follow={this.props.follow}
         users={this.props.users}
-        setfollowingProgres={this.props.setfollowingProgres}
         followingInProgres={this.props.followingInProgres} />
           
     </>
@@ -86,6 +86,6 @@ const mapDispatchToProps = (dispatch) => {
 */
 
 const UsersC = connect(mapStoreToProps, 
-    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setisFetching, setfollowingProgres }) (UsersContainer);
+    {follow, unfollow, setCurrentPage, setfollowingProgres, getUsers }) (UsersContainer);
 
 export default UsersC;

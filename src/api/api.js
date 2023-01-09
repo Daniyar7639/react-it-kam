@@ -14,22 +14,46 @@ export const usersApi = {
         return instance.get(`users?page=${currentPage}&count=${pageSize} `, {
        }).then(response => {
            return response.data});
-       }
-};
-export const followUnfollowApi = {
-    unfollow(u) {
-        instance.delete(`follow/${u.id}`,)
+       },
+    unfollow(userId) {
+        return instance.delete(`follow/${userId}`,)
+        .then(response => {
+            return response.data
+        })
+       },
+    follow(userId) {
+        return instance.post(`follow/${userId}`, {}  )
         .then(response => {
             return response.data
         })
     },
-    follow(u) {
-        instance.post(`follow/${u.id}`, {}  )
+    getProfile(userId) {
+        return instance.get(`profile/ ${userId}`)
+    }
+
+};
+
+export const authsApi = {
+    authMe () {
+        return instance.get(`auth/me/ `, )
+    
+  }
+}
+
+/*export const followUnfollowApi = {
+    unfollow(userId) {
+        return instance.delete(`follow/${userId}`,)
+        .then(response => {
+            return response.data
+        })
+    },
+    follow(userId) {
+        instance.post(`follow/${userId}`, {}  )
         .then(response => {
             return response.data
         })
     }
 };
-
+*/
 
 

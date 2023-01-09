@@ -1,3 +1,5 @@
+import { usersApi } from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -65,13 +67,53 @@ const usersReducer = (state=initialState, action) => {
     
 }
 
-export const follow = (userId) => ({type: FOLLOW, userId});
-export const unfollow = (userId) =>( {type:UNFOLLOW, userId})
+export const followSucces = (userId) => ({type: FOLLOW, userId});
+export const unfollowSucces = (userId) =>( {type:UNFOLLOW, userId})
 export const setUsers = (users) =>( {type:SET_USERS, users})
 export const setCurrentPage = (currentPage) => ({type:SET_CURRENT_PAGE, currentPage})
 export const setTotalUsersCount = (totalUsersCount) => ({type:SET_TOTAL_USERS_COUNT, count:totalUsersCount})
 export const setisFetching = (isFetching) => ({type:SET_IS_FETCHING, isFetching})
 export const setfollowingProgres = (isFetching, userId) => ({type:SET_FOLLOWING_PROGRES, isFetching, userId})
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setisFetching(true));
+        usersApi.getUsers(currentPage, pageSize)
+        .then(data => { 
+            dispatch(setisFetching(false));  
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUsersCount(data.totalCount))
+   }); 
+ }
+};
+
+export const unfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(setfollowingProgres(true, userId));
+        usersApi.unfollow(userId)
+        
+          .then((data) => {
+            if (data.resultCode === 0) {
+              dispatch(unfollowSucces(userId));
+            }
+            dispatch(setfollowingProgres(false, userId));
+          });
+ }
+};
+
+export const follow = (userId) => {
+    return (dispatch) => {
+        dispatch(setfollowingProgres(true, userId));
+        usersApi.follow(userId)
+        
+          .then((data) => {
+            if (data.resultCode === 0) {
+              dispatch(followSucces(userId));
+            }
+            dispatch(setfollowingProgres(false, userId));
+          });
+ }
+}
 
 
 export default usersReducer;
