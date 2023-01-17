@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { follow, setCurrentPage, unfollow, setfollowingProgres, getUsers } from "../../redux/Users-reduser";
 import Users from "./Users";
 import Preloader from "../../common/preloader/preloader";
+import { compose } from "redux";
+import { WithAuthRedirect } from "../hoc/WithAuthRedirect";
 
 
 
@@ -84,8 +86,12 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 */
-
+/*
 const UsersC = connect(mapStoreToProps, 
     {follow, unfollow, setCurrentPage, setfollowingProgres, getUsers }) (UsersContainer);
 
-export default UsersC;
+export default UsersC;*/
+
+export default compose( 
+     connect(mapStoreToProps, {follow, unfollow, setCurrentPage, setfollowingProgres, getUsers }))
+     (UsersContainer)
