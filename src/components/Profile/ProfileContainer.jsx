@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getProfileThunk } from "../../redux/profile-reducer";
+import { getProfileThunk, getStatus, updateStatus } from "../../redux/profile-reducer";
 import Profile from "./Profile";
 import {
   useLocation,
@@ -17,9 +17,10 @@ class ProfileContainer extends React.Component {
   componentDidMount ()  {
     let userId = this.props.router.params.userId;
     if (!userId) {
-      userId = 2;
+      userId = 27321;
     }
-    this.props.getProfileThunk(userId)
+    this.props.getProfileThunk(userId);
+    this.props.getStatus(userId)
     /*usersApi.getProfile(userId).then(response => {  
     this.props.setUserProfile(response.data);
   }); */
@@ -27,7 +28,7 @@ class ProfileContainer extends React.Component {
 
     render () {
       return (
-      <Profile {...this.props} profile={this.props.profile} />
+      <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} />
   );
     }
 };
@@ -35,7 +36,8 @@ class ProfileContainer extends React.Component {
 let AuthRedirectComponent = WithAuthRedirect(ProfileContainer);
 */
 let mapStateToProps = (state) => ({
-  profile: state.profilePage.profile
+  profile: state.profilePage.profile,
+  status: state.profilePage.status
 })
 
 
@@ -56,6 +58,6 @@ function withRouter(Component) {
 /*
 export default connect (mapStateToProps, {getProfileThunk}) (withRouter(AuthRedirectComponent));*/
 
-export default compose( connect (mapStateToProps, {getProfileThunk}),
+export default compose( connect (mapStateToProps, {getProfileThunk, getStatus, updateStatus}),
    withRouter
   )(ProfileContainer)
