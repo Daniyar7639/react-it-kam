@@ -5,7 +5,6 @@ import Post from "./Post/Post";
 
 
 
-
 const Myposts = (props) => {
 
   let postElements = props.posts.map ((p) => {

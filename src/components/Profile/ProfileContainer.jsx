@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getProfileThunk, getStatus, updateStatus } from "../../redux/profile-reducer";
+import { getProfileThunk, getStatus, updateStatus, } from "../../redux/profile-reducer";
 import Profile from "./Profile";
 import {
   useLocation,
@@ -37,7 +37,8 @@ let AuthRedirectComponent = WithAuthRedirect(ProfileContainer);
 */
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
-  status: state.profilePage.status
+  status: state.profilePage.status,
+
 })
 
 
@@ -58,6 +59,6 @@ function withRouter(Component) {
 /*
 export default connect (mapStateToProps, {getProfileThunk}) (withRouter(AuthRedirectComponent));*/
 
-export default compose( connect (mapStateToProps, {getProfileThunk, getStatus, updateStatus}),
+export default compose( connect (mapStateToProps, {getProfileThunk, getStatus, updateStatus, }),
    withRouter
   )(ProfileContainer)

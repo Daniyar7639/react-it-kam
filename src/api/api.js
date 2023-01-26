@@ -44,7 +44,6 @@ export const profileApi = {
     updateStatus(status) {
         return instance.put(`profile/status/`, {status: status} );
     }
-
 };
 
 export const authsApi = {
